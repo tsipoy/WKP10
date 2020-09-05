@@ -1,5 +1,10 @@
 import faker from 'faker';
 
+function wait(ms = 0) {
+	return new Promise(resolve => setTimeout(resolve, ms));	
+}
+
+
 const tbody = document.querySelector('tbody');
 
 let persons = Array.from({ length: 10 }, () => {
@@ -12,6 +17,7 @@ let persons = Array.from({ length: 10 }, () => {
 		phone: faker.phone.phoneNumber(),
 		picture: faker.image.avatar(100, 100),
 	};
+	persons.push(persons);
 });
 
 const displayList = data => {
@@ -39,20 +45,62 @@ const displayList = data => {
 		.join('');
 };
 
-const editPartner = () => {
+const editPartner = (e) => {
 	// code edit function here
+	editPartnerPopup();
 };
 
-const editPartnerPopup = () => {
+const editPartnerPopup = (options) => {
 	// create edit popup here
+	return new Promise(async function(resolve) {
+		const popupForm = document.createElement('form');
+		popupForm.classList.add('popup');
+		popupForm.insertAdjacentHTML('afterbegin',
+		`
+		<fieldset>
+			<form action="/">
+				<label for="last-Name">Enter your lastname
+					<input type="text" id="last-name" required>
+				</label>
+				<label for="first-name">Enter your firstname
+					<input type="text" id="first-name" required>
+				</label>
+				<label for="job-title">Enter your job title
+					<input type="text" id="job-title" required>
+				</label>
+				<label for="job-area">Enter your job area
+					<input type="text" id="job-area" required>
+				</label>
+				<label for="phone-number">Entr your phone number
+					<input type="number" id="phone-number" required>
+				</label>
+				<button type="submit" class="save-btn">Save</button>
+				<button class="cancel-btn">Cancel</button>
+			</form>
+		</fieldset>
+		`)
+	
+		 // insert popup into DOM
+		document.body.appendChild(popupForm);
+		popupForm.classList.add('open');
+		await wait(20);
+		//popupForm.classList.add('open');
+	})
 };
 
-const deletePartner = () => {
+const deletePartner = (e) => {
 	// code delete function gere
 };
 
-const deleteDeletePopup = () => {
+const deleteDeletePopup = (e) => {
 	// create confirmation popup here
+	const deletePopup = e.target.matches('button.cancel-btn');
+	if(e.target.matches('button.cancel-btn')) {
+		deletePopup.classList.remove('.cancel-btn');
+	}
 };
 
 displayList(persons);
+
+tbody.addEventListener('click', editPartner);
+tbody.addEventListener('click', deleteDeletePopup)
