@@ -46,8 +46,11 @@ const displayList = data => {
 };
 
 const editPartner = (e) => {
+	console.log()
 	// code edit function here
-	editPartnerPopup();
+	if (e.target.closest(".edit")) {
+		editPartnerPopup();	
+	}
 };
 
 const editPartnerPopup = (options) => {
