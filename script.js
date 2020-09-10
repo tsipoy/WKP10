@@ -46,15 +46,19 @@ const displayList = data => {
 };
 
 const editPartner = (e) => {
-	console.log()
 	// code edit function here
 	if (e.target.closest(".edit")) {
-		editPartnerPopup();	
+	
+		editPartnerPopup(e);	
 	}
 };
 
-const editPartnerPopup = (options) => {
+const editPartnerPopup = (e) => {
 	// create edit popup here
+	const tableRow = e.currentTarget;
+	const firstName = tableRow.querySelector('td ~ td').textContent;
+	console.log(firstName);
+
 	return new Promise(async function(resolve) {
 		const popupForm = document.createElement('form');
 		popupForm.classList.add('popup');
