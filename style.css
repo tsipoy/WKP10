@@ -107,10 +107,10 @@ form {
 }
 
 .popup {
-	background: gray;
+	background: rgba(37, 36, 36, 0.3);
 	position: fixed;
-	/* height: 100vh;
-	width: 100vw; */
+	height: 100vh;
+	width: 100vw;
 	transition: all 0.25s;
 	top: 0;
 	display: grid;
@@ -140,7 +140,15 @@ form {
 	pointer-events: all;
 }
 
-.popup.open fieldset {
-	--scale: 1;
+.popup.open fieldset,
+div {
+    --scale: 1;
+    background-color: aliceblue;
+}
+
+div {
+    --scale: 1;
+	background-color: aliceblue;
+	padding: 3rem;
 }
 
